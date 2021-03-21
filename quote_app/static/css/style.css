@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* outline: 1px red dotted; */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px 15px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+header h1 {
+    display: inline;
+}
+
+.message {
+    display: block;
+    color: red;
+    padding: 10px;
+}
+
+.right-nav {
+    display: inline-block;
+}
+
+form label {
+    display: block;
+}
+
+.left-column {
+    display: inline;
+    text-align: left;
+}
+
+.right-column {
+    display: inline;
+}
+
+.quotes-view {
+    max-width: 65%;
+}
+
+.quote {
+    border: 1px black solid;
+    margin: 10px;
+    padding: 5px;
+}
+
+.quote p {
+    margin: 8px;
+}
+
+.quote form input {
+    text-align: right;
+    display: inline-block;
+}
+
+.logout-button {
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: white;
+    border: 1px black solid;
+    border-radius: 3px;
+    text-decoration: none;
+    color: black;
+}

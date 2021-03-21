@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome {{user.first_name}} {{user.last_name}}!</h1>
+        <div class="right-nav">
+            <a href="/myaccount/{{user.id}}">Edit My Account</a>
+            <a href="/logout/" class="logout-button">Logout</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="left-column">
+            <div class="quotes-view">
+                {% if quotes %}
+                    <h3>Quotes</h3>
+                    <div class="quotes"></div>
+                    {% for quote in quotes %}
+                        <div class="quote">
+                            <p>{{quote.author}}: {{quote.quotation}}</p>
+                            <p>Posted by <a href="/user/{{quote.posted_by.id}}">{{quote.posted_by.first_name}} {{quote.posted_by.last_name}}</a></p>
+                            <p>{{quote.likes.all|length}} people like this</p>
+                            {% if quote not in user.liked_quotes.all.quote %}
+                                <form action="/like/{{quote.id}}/">
+                                    <input type="submit" value='Like!'>
+                                </form>
+                            {% else %}
+                                <p>You like this quote!</p>
+                            {% endif %}
+                            {% if quote.posted_by.id == user.id %}
+                                <a href="/delete_quote/{{quote.id}}/">Delete</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="new-quote-form">
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li class="message">{{message}}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                <h3>Add a Quote!</h3>
+                <form action="/add_quote/" method="POST">
+                    {% csrf_token %}
+                    <label>Author <input type="text" name="author"></label>
+                    <label>Quote <input type="text" name="quote"></label>
+                    <input type="submit" value="Sumbit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
